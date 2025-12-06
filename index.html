@@ -4,19 +4,85 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Brick Breaker</title>
+    <title>Brick Breaker - Play Now!</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        .hero {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            color: #e94560;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            text-shadow: 0 0 20px rgba(233, 69, 96, 0.5);
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 40px;
+            color: #a0a0a0;
+        }
+
+        .cta-btn {
+            padding: 15px 40px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #fff;
+            background: #e94560;
+            border: none;
+            border-radius: 50px;
+            text-decoration: none;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 5px 15px rgba(233, 69, 96, 0.4);
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(233, 69, 96, 0.6);
+            background: #c32d46;
+        }
+
+        .auth-links {
+            margin-top: 30px;
+            font-size: 1rem;
+        }
+
+        .auth-links a {
+            color: #fff;
+            margin: 0 10px;
+            text-decoration: none;
+            opacity: 0.8;
+            transition: opacity 0.2s;
+        }
+
+        .auth-links a:hover {
+            opacity: 1;
+            text-decoration: underline;
+        }
+    </style>
 </head>
 
 <body>
-    <div class="game-container">
+    <div class="hero">
         <h1>Brick Breaker</h1>
-        <div class="score-board">Score: <span id="score">0</span> | Best: <span id="highScore">0</span></div>
-        <canvas id="gameCanvas" width="800" height="600"></canvas>
-        <p class="controls">Use <strong>Arrow Keys</strong> or <strong>Mouse</strong> to move</p>
+        <p>The classic arcade experience, reimagined.</p>
+        <a href="game.html" class="cta-btn">Play Now</a>
+
+        <div class="auth-links">
+            <a href="login.html">Login</a>
+            <span>|</span>
+            <a href="signup.html">Sign Up</a>
+        </div>
     </div>
-    <script src="script.js"></script>
 </body>
 
 </html>
