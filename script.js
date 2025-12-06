@@ -1,6 +1,7 @@
 const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
 const scoreElement = document.getElementById('score');
+const highScoreElement = document.getElementById('highScore');
 
 // Game Constants
 const PADDLE_HEIGHT = 15;
@@ -22,6 +23,9 @@ const COLOR_TEXT = '#fff';
 
 // Game State
 let score = 0;
+let highScore = localStorage.getItem('brickBreakerHighScore') || 0;
+if (highScoreElement) highScoreElement.innerText = highScore;
+
 let lives = 3;
 let rightPressed = false;
 let leftPressed = false;
@@ -73,6 +77,14 @@ function mouseMoveHandler(e) {
     }
 }
 
+function updateHighScore() {
+    if (score > highScore) {
+        highScore = score;
+        localStorage.setItem('brickBreakerHighScore', highScore);
+        if (highScoreElement) highScoreElement.innerText = highScore;
+    }
+}
+
 function collisionDetection() {
     for (let c = 0; c < BRICK_COLUMN_COUNT; c++) {
         for (let r = 0; r < BRICK_ROW_COUNT; r++) {
@@ -83,7 +95,11 @@ function collisionDetection() {
                     b.status = 0;
                     score++;
                     scoreElement.innerText = score;
+                    if (score > highScore) {
+                        if (highScoreElement) highScoreElement.innerText = score;
+                    }
                     if (score === BRICK_ROW_COUNT * BRICK_COLUMN_COUNT) {
+                        updateHighScore();
                         alert('YOU WIN, CONGRATULATIONS!');
                         document.location.reload();
                     }
@@ -142,24 +158,14 @@ function draw() {
     }
     if (y + dy < BALL_RADIUS) {
         dy = -dy;
-    } else if (y + dy > canvas.height - BALL_RADIUS - 10) { // Check bottom
+    } else if (y + dy > canvas.height - BALL_RADIUS - PADDLE_HEIGHT - 10) { // Check collision with paddle level
         if (x > paddleX && x < paddleX + PADDLE_WIDTH) {
-            // Paddle hit logic: Add some angle variation based on hit position could be nice, 
-            // but for now simple bounce
             dy = -dy;
-            // Speed up slightly on paddle hit to make it interesting?
-            // dx = dx * 1.05; 
-            // dy = dy * 1.05;
         } else if (y + dy > canvas.height - BALL_RADIUS) {
-            // Game Over
-            // alert('GAME OVER');
-            // document.location.reload();
-            // Instead of blocking alert, let's just reset for now or stop
+            // Game Over - Hit bottom
             lives--;
             if (!lives) {
-                // alert("GAME OVER");
-                // document.location.reload();
-                // To avoid blocking the browser continuously in development:
+                updateHighScore();
                 x = canvas.width / 2;
                 y = canvas.height - 30;
                 dx = 4;
@@ -167,7 +173,6 @@ function draw() {
                 paddleX = (canvas.width - PADDLE_WIDTH) / 2;
                 score = 0;
                 scoreElement.innerText = score;
-                // createBricks(); // Reset bricks if we want full reset
             } else {
                 x = canvas.width / 2;
                 y = canvas.height - 30;
