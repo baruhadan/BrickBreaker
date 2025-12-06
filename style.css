@@ -1,0 +1,48 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #1a1a2e;
+    color: #fff;
+    font-family: 'Roboto', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.game-container {
+    text-align: center;
+}
+
+h1 {
+    margin-bottom: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #e94560;
+}
+
+.score-board {
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+}
+
+canvas {
+    background: #16213e;
+    border: 4px solid #0f3460;
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    display: block;
+    margin: 0 auto;
+    cursor: none; /* Hide cursor over canvas for better immersion */
+}
+
+.controls {
+    margin-top: 15px;
+    font-size: 0.9rem;
+    color: #a0a0a0;
+}
